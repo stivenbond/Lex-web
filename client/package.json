@@ -21,7 +21,7 @@
     "@hookform/resolvers": "^3.9.0",
     "zod": "^3.23.0",
     "@microsoft/signalr": "^8.0.0",
-    "keycloak-js": "^24.0.0",
+    "keycloak-js": "^26.2.3",
     "@radix-ui/react-dialog": "^1.1.0",
     "@radix-ui/react-dropdown-menu": "^2.1.0",
     "@radix-ui/react-toast": "^1.2.0",
