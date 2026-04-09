@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lex.SharedKernel.Domain.Models;
+namespace Lex.SharedKernel.Domain.Abstractions;
+
 //TODO Add docs
 
 /// <summary>
