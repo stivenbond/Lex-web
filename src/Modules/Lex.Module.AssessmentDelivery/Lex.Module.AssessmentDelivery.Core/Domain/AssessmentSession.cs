@@ -43,22 +43,3 @@ public sealed class AssessmentSession : AggregateRoot
         EndTime = DateTime.UtcNow;
     }
 }
-
-public class Answer(string QuestionId, string Content) : ValueObject
-{
-    public string QuestionId { get; } = QuestionId;
-    public string Content { get; } = Content;
-
-    public override IEnumerable<object?> GetEqualityComponents()
-    {
-        yield return QuestionId;
-        yield return Content;
-    }
-}
-
-public enum SessionStatus
-{
-    InProgress,
-    Submitted,
-    Graded
-}

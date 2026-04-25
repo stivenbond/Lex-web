@@ -28,15 +28,3 @@ public sealed class DiaryEntry : AggregateRoot
         _attachments.Add(new DiaryAttachment(fileId, fileName));
     }
 }
-
-public class DiaryAttachment(Guid FileId, string FileName) : ValueObject
-{
-    public Guid FileId { get; } = FileId;
-    public string FileName { get; } = FileName;
-
-    public override IEnumerable<object?> GetEqualityComponents()
-    {
-        yield return FileId;
-        yield return FileName;
-    }
-}

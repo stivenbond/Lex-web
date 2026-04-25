@@ -1,5 +1,7 @@
 # Specification Validation Report
 
+Historical note: this document reflects a design/spec review snapshot, not current implementation health or delivery status. Use `docs/project/implementation-status.md` for current repo truth.
+
 ## Overview
 
 This report documents a comprehensive review of all specification files in the `/docs/specs/` directory to identify:
@@ -173,7 +175,7 @@ No circular dependencies detected. ✅
 
 ## Gaps (Not Conflicts)
 
-These are known gaps with pending implementation, properly tracked in TODO.md:
+These are known gaps with pending implementation, now tracked in `docs/project/implementation-status.md`:
 
 1. **Database Migrations** — Schemas specified, migrations not yet written
 2. **API Controllers** — Endpoints specified, controllers not implemented

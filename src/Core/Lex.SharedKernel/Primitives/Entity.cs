@@ -10,5 +10,3 @@ public abstract class Entity
     protected void RaiseDomainEvent(IDomainEvent e) => _domainEvents.Add(e);
     public void ClearDomainEvents() => _domainEvents.Clear();
 }
-
-public abstract class AggregateRoot : Entity { }

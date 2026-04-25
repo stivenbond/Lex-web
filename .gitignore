@@ -11,6 +11,9 @@ secrets/
 node_modules/
 .next/
 .turbo/
+.dotnet/
+.npm-cache/
+*.tsbuildinfo
 dist/
 .DS_Store
 Thumbs.db

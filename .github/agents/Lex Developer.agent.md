@@ -1,10 +1,15 @@
 ---
 name: Lex Developer
-description: Describe what this custom agent does and when to use it.
-argument-hint: The inputs this agent expects, e.g., "a task to implement" or "a question to answer".
-# tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo'] # specify the tools this agent can use. If not set, all enabled tools are allowed.
+description: Legacy placeholder. Use the repo-local Codex skill and canonical docs instead when implementing, reviewing, or planning work in the Lex repository.
+argument-hint: A Lex implementation, cleanup, review, or documentation task.
 ---
 
-<!-- Tip: Use /create-agent in chat to generate content with agent assistance -->
+# Legacy notice
 
-Define what this custom agent does, including its behavior, capabilities, and any specific instructions for its operation.
+Prefer the canonical guidance in:
+
+- `.codex/skills/lex-platform-delivery/`
+- `docs/project/implementation-status.md`
+- `docs/README.md`
+
+Do not treat placeholder or platform-specific agent files as the source of truth.
