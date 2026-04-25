@@ -1,4 +1,6 @@
 using Lex.Module.DiaryManagement.Core.Domain;
+using Lex.SharedKernel.Primitives;
+using MediatR;
 
 namespace Lex.Module.DiaryManagement.Core.Features.CreateDiaryEntry;
 

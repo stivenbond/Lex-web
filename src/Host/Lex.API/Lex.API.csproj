@@ -21,7 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Yarp.ReverseProxy"          Version="2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.*" />
-    <PackageReference Include="Scalar.AspNetCore"           Version="1.*" />
+    <PackageReference Include="Swashbuckle.AspNetCore"      Version="6.*" />
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Lex.Module.Scheduling.Tests;
 
+[Trait("Category", "Integration")]
 public sealed class SchedulingRepositoryIntegrationTests : IClassFixture<AppContainerFixture>, IAsyncLifetime
 {
     private readonly AppContainerFixture _fixture;

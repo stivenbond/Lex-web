@@ -33,10 +33,20 @@ jobs:
         with:
           path: ~/.nuget/packages
           key: nuget-${{ hashFiles('**/*.csproj') }}
-      - run: dotnet restore Lex.sln
-      - run: dotnet build Lex.sln --no-restore -c Release
-      - run: dotnet test Lex.sln --no-build -c Release --filter "Category!=Integration" --logger "trx" --collect:"XPlat Code Coverage"
-      - run: dotnet format Lex.sln --verify-no-changes
+      - run: dotnet restore Lex.slnx
+      - run: dotnet build Lex.slnx --no-restore -c Release
+      - run: dotnet test Lex.slnx --no-build -c Release --filter "Category!=Integration" --logger "trx" --collect:"XPlat Code Coverage"
+      - name: Integration tests (Docker)
+        run: |
+          if ! docker info > /dev/null 2>&1; then
+            echo "Docker not available; skipping integration tests."
+            exit 0
+          fi
+          dotnet test Lex.slnx --no-build -c Release --filter "Category=Integration" --logger "trx"
+      - name: dotnet format (verify)
+        run: |
+          dotnet tool install -g dotnet-format
+          dotnet format Lex.slnx --verify-no-changes
       - uses: codecov/codecov-action@v4
         with: { files: "**/coverage.cobertura.xml" }
 

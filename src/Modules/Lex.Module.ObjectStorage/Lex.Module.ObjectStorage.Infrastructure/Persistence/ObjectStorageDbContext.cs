@@ -1,5 +1,6 @@
 using Lex.Module.ObjectStorage.Core.Domain;
 using Lex.Module.ObjectStorage.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lex.Module.ObjectStorage.Persistence;
 

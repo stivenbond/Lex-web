@@ -12,4 +12,42 @@
     <PackageReference Include="NetArchTest.Rules"         Version="1.*" />
     <PackageReference Include="FluentAssertions"          Version="6.*" />
   </ItemGroup>
+
+  <!-- Load assemblies under test for reflection/NetArchTest rules -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Host\Lex.API\Lex.API.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.DiaryManagement\Lex.Module.DiaryManagement.Core\Lex.Module.DiaryManagement.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.DiaryManagement\Lex.Module.DiaryManagement.Infrastructure\Lex.Module.DiaryManagement.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.Scheduling\Lex.Module.Scheduling.Core\Lex.Module.Scheduling.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.Scheduling\Lex.Module.Scheduling.Infrastructure\Lex.Module.Scheduling.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.LessonManagement\Lex.Module.LessonManagement.Core\Lex.Module.LessonManagement.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.LessonManagement\Lex.Module.LessonManagement.Infrastructure\Lex.Module.LessonManagement.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.AssessmentCreation\Lex.Module.AssessmentCreation.Core\Lex.Module.AssessmentCreation.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.AssessmentCreation\Lex.Module.AssessmentCreation.Infrastructure\Lex.Module.AssessmentCreation.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.AssessmentDelivery\Lex.Module.AssessmentDelivery.Core\Lex.Module.AssessmentDelivery.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.AssessmentDelivery\Lex.Module.AssessmentDelivery.Infrastructure\Lex.Module.AssessmentDelivery.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.GoogleIntegration\Lex.Module.GoogleIntegration.Core\Lex.Module.GoogleIntegration.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.GoogleIntegration\Lex.Module.GoogleIntegration.Infrastructure\Lex.Module.GoogleIntegration.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.FileProcessing\Lex.Module.FileProcessing.Core\Lex.Module.FileProcessing.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.FileProcessing\Lex.Module.FileProcessing.Infrastructure\Lex.Module.FileProcessing.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.ImportExport\Lex.Module.ImportExport.Core\Lex.Module.ImportExport.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.ImportExport\Lex.Module.ImportExport.Infrastructure\Lex.Module.ImportExport.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.ObjectStorage\Lex.Module.ObjectStorage.Core\Lex.Module.ObjectStorage.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.ObjectStorage\Lex.Module.ObjectStorage.Infrastructure\Lex.Module.ObjectStorage.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.Notifications\Lex.Module.Notifications.Core\Lex.Module.Notifications.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.Notifications\Lex.Module.Notifications.Infrastructure\Lex.Module.Notifications.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.Reporting\Lex.Module.Reporting.Core\Lex.Module.Reporting.Core.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lex.Module.Reporting\Lex.Module.Reporting.Infrastructure\Lex.Module.Reporting.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

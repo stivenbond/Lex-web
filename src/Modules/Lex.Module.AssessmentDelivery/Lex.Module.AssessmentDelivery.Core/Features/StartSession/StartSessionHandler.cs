@@ -1,4 +1,6 @@
 using Lex.Module.AssessmentDelivery.Core.Domain;
+using Lex.SharedKernel.Primitives;
+using MediatR;
 
 namespace Lex.Module.AssessmentDelivery.Core.Features.StartSession;
 

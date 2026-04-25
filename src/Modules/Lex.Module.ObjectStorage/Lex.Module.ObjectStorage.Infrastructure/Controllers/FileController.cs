@@ -1,5 +1,6 @@
 using Lex.SharedKernel.Abstractions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lex.Module.ObjectStorage.Infrastructure.Controllers;

@@ -7,7 +7,6 @@ using Testcontainers.RabbitMq;
 using Xunit;
 using Respawn;
 using Lex.Infrastructure.Persistence;
-using Lex.API;
 
 namespace Lex.IntegrationTests;
 
