@@ -41,7 +41,11 @@ app.UseAuthorization();
 if (app.Environment.IsDevelopment()) app.MapOpenApi();
 
 app.MapHealthChecks("/healthz");
-app.MapHealthChecks("/readyz");
+app.UseHealthChecks("/readyz");
+
+app.UseLexInfrastructure();
+
+app.MapControllers();
 app.MapReverseProxy();
 
 app.Run();

@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Builder;
+using HealthChecks.RabbitMQ;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Metrics;
+using Lex.SharedKernel.Abstractions;
+using MassTransit;
+using Minio;
 
 namespace Lex.Infrastructure;
 
@@ -12,9 +16,21 @@ public static class InfrastructureServiceRegistration
 {
     public static WebApplicationBuilder AddLexInfrastructure(this WebApplicationBuilder builder)
     {
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<ICurrentUser, Identity.CurrentUserService>();
+
         builder.AddLexSerilog().AddLexOpenTelemetry().AddLexMassTransit()
                .AddLexKeycloak().AddLexRedis().AddLexMinio().AddLexHealthChecks();
+
+        builder.Services.AddScoped<IAsyncJobTracker, Notifications.AsyncJobTracker>();
+
         return builder;
+    }
+
+    public static WebApplication UseLexInfrastructure(this WebApplication app)
+    {
+        app.MapHub<Notifications.AsyncJobHub>("/hubs/jobs");
+        return app;
     }
 
     private static WebApplicationBuilder AddLexSerilog(this WebApplicationBuilder builder)
@@ -106,8 +122,9 @@ public static class InfrastructureServiceRegistration
     private static WebApplicationBuilder AddLexHealthChecks(this WebApplicationBuilder builder)
     {
         builder.Services.AddHealthChecks()
-            .AddNpgsql(builder.Configuration.GetConnectionString("Default") ?? "", name: "postgres")
-            .AddRedis(builder.Configuration.GetConnectionString("Redis") ?? "redis:6379", name: "redis");
+            .AddNpgSql(builder.Configuration.GetConnectionString("Default")!)
+            .AddRabbitMQ(new Uri(builder.Configuration.GetConnectionString("RabbitMQ") ?? "amqp://guest:guest@localhost:5672"))
+            .AddRedis(builder.Configuration.GetConnectionString("Redis") ?? "redis:6379", "redis");
         return builder;
     }
 }

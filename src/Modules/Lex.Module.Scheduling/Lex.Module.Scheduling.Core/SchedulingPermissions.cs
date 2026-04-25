@@ -2,8 +2,15 @@ namespace Lex.Module.Scheduling;
 public static class SchedulingPermissions
 {
     private const string Prefix = "scheduling";
-    public const string View   = $"{Prefix}.view";
-    public const string Create = $"{Prefix}.create";
-    public const string Edit   = $"{Prefix}.edit";
-    public const string Delete = $"{Prefix}.delete";
+
+    // Spec-aligned policy names
+    public const string ManageCalendar = $"{Prefix}.manage-calendar";
+    public const string AssignSlots = $"{Prefix}.assign-slots";
+    public const string ViewSchedule = $"{Prefix}.view-schedule";
+
+    // Backward-compatible aliases for any existing callers
+    public const string View = ViewSchedule;
+    public const string Create = ManageCalendar;
+    public const string Edit = AssignSlots;
+    public const string Delete = AssignSlots;
 }

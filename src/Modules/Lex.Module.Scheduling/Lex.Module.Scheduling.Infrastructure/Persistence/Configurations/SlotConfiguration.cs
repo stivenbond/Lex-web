@@ -67,7 +67,7 @@ public sealed class SlotConfiguration : IEntityTypeConfiguration<Slot>
         // Indexes
         builder.HasIndex(x => new { x.TermId, x.DayOfWeek, x.StartTime })
             .IsUnique()
-            .HasName("ix_unique_slot_per_day_time");
+            .HasDatabaseName("ix_unique_slot_per_day_time");
 
         builder.HasIndex(x => new { x.TermId, x.SlotNumber });
     }

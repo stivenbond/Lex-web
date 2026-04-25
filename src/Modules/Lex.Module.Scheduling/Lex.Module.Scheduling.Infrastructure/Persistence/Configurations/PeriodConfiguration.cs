@@ -82,18 +82,15 @@ public sealed class PeriodConfiguration : IEntityTypeConfiguration<Period>
         // Indexes
         builder.HasIndex(x => new { x.SlotId, x.SectionId })
             .IsUnique()
-            .HasName("ix_unique_period_per_section_slot")
-            .HasComment("Ensures a section has only one period per slot (no double-booking)");
+            .HasDatabaseName("ix_unique_period_per_section_slot");
 
         builder.HasIndex(x => new { x.SlotId, x.ClassroomId })
             .IsUnique()
-            .HasName("ix_unique_period_per_classroom_slot")
-            .HasComment("Ensures a classroom is not double-booked in the same slot");
+            .HasDatabaseName("ix_unique_period_per_classroom_slot");
 
         builder.HasIndex(x => new { x.SlotId, x.TeacherId })
             .IsUnique()
-            .HasName("ix_unique_period_per_teacher_slot")
-            .HasComment("Ensures a teacher is not double-booked in the same slot");
+            .HasDatabaseName("ix_unique_period_per_teacher_slot");
 
         builder.HasIndex(x => x.Subject);
 

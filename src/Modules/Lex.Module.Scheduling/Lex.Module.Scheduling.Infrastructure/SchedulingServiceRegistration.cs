@@ -1,3 +1,7 @@
+using FluentValidation;
+using Lex.Module.Scheduling.Core.Domain;
+using Lex.Module.Scheduling.Core.Features.SchedulingEvents;
+using Lex.Module.Scheduling.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +19,17 @@ public static class SchedulingServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(SchedulingPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(SchedulingPermissions).Assembly);
-        // TODO: add repositories, consumers, external API clients
+        services.AddScoped<ISchedulingRepository, SchedulingRepository>();
+        services.AddScoped<ISchedulingEventPublisher, SchedulingEventPublisher>();
+
+        services.AddAuthorizationBuilder()
+            .AddPolicy(SchedulingPermissions.ViewSchedule, p => p.RequireAuthenticatedUser())
+            .AddPolicy(SchedulingPermissions.ManageCalendar, p => p.RequireAuthenticatedUser())
+            .AddPolicy(SchedulingPermissions.AssignSlots, p => p.RequireAuthenticatedUser());
+
+        services.AddControllers()
+            .AddApplicationPart(typeof(Lex.Module.Scheduling.Infrastructure.Controllers.SchedulingController).Assembly);
+
         return services;
     }
 }

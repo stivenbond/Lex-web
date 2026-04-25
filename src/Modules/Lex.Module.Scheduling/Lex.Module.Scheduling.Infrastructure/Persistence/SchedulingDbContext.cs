@@ -1,16 +1,11 @@
+using Lex.Infrastructure.Persistence;
 using Lex.Module.Scheduling.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lex.Module.Scheduling.Persistence;
 
-/// <summary>
-/// DbContext for the Scheduling module.
-/// Manages the "scheduling" schema and all scheduling-related aggregates.
-/// This module is responsible for its own schema and can be extracted into a microservice independently.
-/// </summary>
-public sealed class SchedulingDbContext : DbContext
+public sealed class SchedulingDbContext(DbContextOptions<SchedulingDbContext> options) : BaseDbContext<SchedulingDbContext>(options)
 {
-    public SchedulingDbContext(DbContextOptions<SchedulingDbContext> options) : base(options) { }
 
     /// <summary>
     /// Academic years - top-level container for all scheduling activities.
