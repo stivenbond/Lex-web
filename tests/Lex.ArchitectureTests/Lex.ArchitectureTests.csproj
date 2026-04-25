@@ -10,7 +10,7 @@
     <PackageReference Include="xunit"                     Version="2.*" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.*" />
     <PackageReference Include="NetArchTest.Rules"         Version="1.*" />
-    <PackageReference Include="FluentAssertions"          Version="6.*" />
+    <PackageReference Include="FluentAssertions"          Version="8.*" />
   </ItemGroup>
 
   <!-- Load assemblies under test for reflection/NetArchTest rules -->
