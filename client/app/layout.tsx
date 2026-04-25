@@ -3,6 +3,19 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = { title: { default: "Lex", template: "%s | Lex" }, manifest: "/manifest.webmanifest" };
+import { AuthProvider } from "@/lib/auth/AuthContext";
+import { SignalRProvider } from "@/lib/auth/SignalRProvider";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body className={inter.className}>{children}</body></html>;
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <AuthProvider>
+          <SignalRProvider>
+            {children}
+          </SignalRProvider>
+        </AuthProvider>
+      </body>
+    </html>
+  );
 }

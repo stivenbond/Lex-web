@@ -28,4 +28,17 @@ public sealed record Error(string Code, string Message, ErrorType Type = ErrorTy
     public static Error Unauthorized(string code, string message) => new(code, message, ErrorType.Unauthorized);
 }
 
+public sealed record Result
+{
+    public Error? Error { get; }
+    public bool IsSuccess { get; }
+    public bool IsFailure => !IsSuccess;
+
+    private Result(bool isSuccess, Error? error) { IsSuccess = isSuccess; Error = error; }
+
+    public static Result Success()               => new(true, null);
+    public static Result Failure(Error error)    => new(false, error);
+    public static implicit operator Result(Error error) => Failure(error);
+}
+
 public enum ErrorType { Failure, NotFound, Validation, Conflict, Unauthorized }

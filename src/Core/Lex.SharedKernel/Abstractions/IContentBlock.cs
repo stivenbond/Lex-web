@@ -5,14 +5,18 @@ namespace Lex.SharedKernel.Domain.Abstractions;
 
 //TODO Add docs
 
+public interface IContentBlock
+{
+    Guid Id { get; }
+    DateTimeOffset CreatedAt { get; }
+    IReadOnlyDictionary<string, string>? Metadata { get; }
+}
+
 /// <summary>
 /// A generic base for blocks that carry specific data models.
 /// </summary>
-public interface IContentBlock<out TData>
+public interface IContentBlock<out TData> : IContentBlock
 {
-    Guid Id { get; }
-    Date CreatedDate {get;} //TODO find correct type
-    IReadDictionary<string, string>? Metadata {get;}
     TData Content { get; }
 }
 

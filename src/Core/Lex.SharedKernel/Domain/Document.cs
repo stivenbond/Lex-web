@@ -1,7 +1,8 @@
-using Lex.SharedKernel.Domain.Abstractions;
+namespace Lex.SharedKernel.Domain;
+
 public class Document
 {
     public Guid Id { get; set; }
-    public string Title { get; set; }
-    public List<IContentBlock<TData>> Blocks { get; init; }
+    public string Title { get; set; } = string.Empty;
+    public List<Lex.SharedKernel.Domain.Abstractions.IContentBlock> Blocks { get; init; } = [];
 }

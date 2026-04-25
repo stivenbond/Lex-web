@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,9 @@ public static class AssessmentDeliveryServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(AssessmentDeliveryPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(AssessmentDeliveryPermissions).Assembly);
-        // TODO: add repositories, consumers, external API clients
+        services.AddScoped<Lex.Module.AssessmentDelivery.Core.Domain.IDeliveryRepository>(sp => 
+            sp.GetRequiredService<Lex.Module.AssessmentDelivery.Persistence.AssessmentDeliveryDbContext>());
+
         return services;
     }
 }

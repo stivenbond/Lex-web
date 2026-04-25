@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,9 @@ public static class GoogleIntegrationServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(GoogleIntegrationPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(GoogleIntegrationPermissions).Assembly);
-        // TODO: add repositories, consumers, external API clients
+        
+        services.AddScoped<Lex.Module.GoogleIntegration.Core.Abstractions.IGoogleDriveService, Lex.Module.GoogleIntegration.Infrastructure.Services.GoogleDriveService>();
+
         return services;
     }
 }

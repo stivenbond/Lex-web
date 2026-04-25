@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,9 @@ public static class FileProcessingServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(FileProcessingPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(FileProcessingPermissions).Assembly);
-        // TODO: add repositories, consumers, external API clients
+        
+        services.AddScoped<Lex.Module.FileProcessing.Core.Abstractions.IFileProcessor, Lex.Module.FileProcessing.Infrastructure.Processors.PdfFileProcessor>();
+
         return services;
     }
 }

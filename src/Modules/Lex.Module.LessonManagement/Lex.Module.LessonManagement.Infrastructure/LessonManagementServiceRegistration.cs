@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ public static class LessonManagementServiceRegistration
     {
         var cs = configuration.GetConnectionString("Default")
             ?? throw new InvalidOperationException("Connection string 'Default' not configured.");
-        services.AddDbContext<Lex.Module.LessonManagement.Persistence.LessonManagementDbContext>(o =>
+        services.AddDbContext<Lex.Module.LessonManagement.Persistence.LessonDbContext>(o =>
             o.UseNpgsql(cs, b => b.MigrationsAssembly(typeof(LessonManagementServiceRegistration).Assembly.FullName)));
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(LessonManagementPermissions).Assembly));

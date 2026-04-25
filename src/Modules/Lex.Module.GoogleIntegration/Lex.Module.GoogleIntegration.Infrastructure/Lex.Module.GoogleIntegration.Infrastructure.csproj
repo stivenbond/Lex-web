@@ -6,14 +6,15 @@
   </PropertyGroup>
   <!-- Infrastructure may NOT reference other Module.*.Core or Module.*.Infrastructure -->
   <ItemGroup>
-    <ProjectReference Include="..$APP.Module.GoogleIntegration.Core$APP.Module.GoogleIntegration.Core.csproj" />
+    <ProjectReference Include="..\Lex.Module.GoogleIntegration.Core\Lex.Module.GoogleIntegration.Core.csproj" />
     <ProjectReference Include="..\..\..\Core\Lex.Infrastructure\Lex.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore"          Version="8.*" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"  Version="8.*" />
-    <PackageReference Include="MassTransit.RabbitMQ"                   Version="8.*" />
-    <PackageReference Include="Refit.HttpClientFactory"                Version="7.*" />
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience"   Version="8.*" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.73.0.4112" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.*" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.*" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.*" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="7.*" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.*" />
   </ItemGroup>
 </Project>

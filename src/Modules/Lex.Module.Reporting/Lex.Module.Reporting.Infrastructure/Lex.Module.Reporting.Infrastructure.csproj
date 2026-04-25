@@ -6,7 +6,7 @@
   </PropertyGroup>
   <!-- Infrastructure may NOT reference other Module.*.Core or Module.*.Infrastructure -->
   <ItemGroup>
-    <ProjectReference Include="..$APP.Module.Reporting.Core$APP.Module.Reporting.Core.csproj" />
+    <ProjectReference Include="..\Lex.Module.Reporting.Core\Lex.Module.Reporting.Core.csproj" />
     <ProjectReference Include="..\..\..\Core\Lex.Infrastructure\Lex.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>

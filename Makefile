@@ -11,7 +11,7 @@ SVC   ?=
 FORM  ?=
 TITLE ?=
 
-SCRIPTS := scripts
+SCRIPTS := infra/scripts
 
 .PHONY: help
 help: ## Show this help
