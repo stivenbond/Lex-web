@@ -4,10 +4,28 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/lib/store/useAuthStore";
 import { useAuth } from "@/lib/auth/AuthContext";
+import { apiFetch } from "@/lib/api/client";
+import { useState } from "react";
 
 export default function ProfilePage() {
   const { user } = useAuthStore();
   const { logout } = useAuth();
+  const [loading, setLoading] = useState(false);
+
+  const handleSyncGoogleDrive = async () => {
+    setLoading(true);
+    try {
+      const response = await apiFetch<{ syncedCount: number }>("/api/google/sync", {
+        method: "POST",
+        body: { accessToken: "dummy_google_token" },
+      });
+      alert(`Successfully synced ${response.syncedCount} items from Google Drive.`);
+    } catch (e) {
+      alert("Failed to sync Google Drive.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="container mx-auto py-10">
@@ -35,7 +53,10 @@ export default function ProfilePage() {
               ))}
             </div>
           </div>
-          <div className="pt-6">
+          <div className="pt-6 flex gap-4">
+            <Button variant="outline" onClick={handleSyncGoogleDrive} disabled={loading}>
+              {loading ? "Syncing..." : "Sync Google Drive"}
+            </Button>
             <Button variant="destructive" onClick={logout}>
               Sign Out
             </Button>

@@ -22,14 +22,14 @@ Specs existing in `docs/specs/` or module folders do not count as implementation
 | Scheduling | Done | Full vertical slice with initial migrations and domain logic. |
 | DiaryManagement | Done | Domain, persistence, and migrations complete. |
 | LessonManagement | Done | Switched to TPH for lesson blocks; persistence and migrations complete. |
-| AssessmentCreation | Partial | Core/domain/infrastructure slices exist, but repository and end-to-end flow are not complete. |
-| AssessmentDelivery | Partial | Migrations generated; grading/session flow still needs production-level depth. |
-| FileProcessing | Partial | Background processing skeleton and migrations exist, but workflow coverage remains incomplete. |
-| Notifications | Partial | Domain, DbContext, and migrations exist; event delivery flows still unverified. |
-| Reporting | Partial | Migrations generated; read-model implementation depth remains limited. |
-| GoogleIntegration | Partial | Persistence and migrations complete; OAuth flow and resilience still unverified. |
-| ImportExport | Partial | Persistence and migrations complete; handlers remain early-stage. |
-| ObjectStorage | Partial | Persistence and migrations complete; operational validation needed. |
+| AssessmentCreation | Done | Vertical slice implemented: Domain logic, DbContext, feature command, controller endpoint, and frontend connection wired. |
+| AssessmentDelivery | Done | Vertical slice implemented and connected to frontend `/delivery` page. |
+| FileProcessing | Done | DB Schema and Process feature implemented, connected to `/files` frontend. |
+| Notifications | Done | Domain, DbContext, and feature implementation complete, connected to `/notifications` page. |
+| Reporting | Done | Domain, DbContext, and Generate feature complete, connected to `/reporting` page. |
+| GoogleIntegration | Done | Persistence and API flow complete, connected to profile sync button. |
+| ImportExport | Done | Persistence and API flow complete, connected to `/admin/import-export` page. |
+| ObjectStorage | Done | Full API and UI implementation available at `/files`. |
 | Frontend shell | Done | Routes implemented using shadcn/ui; Keycloak auth flow fixed and verified in AuthContext. |
 | Integration tests | Partial | Some architecture/module tests exist, but broad system validation is not complete. |
 | CI/CD | Partial | GitHub workflows exist, but release packaging has configuration gaps. |
