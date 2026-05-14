@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ "$(basename "$SCRIPT_DIR")" == "scripts" ]]; then
+  cd "$(dirname "$SCRIPT_DIR")"
+else
+  cd "$SCRIPT_DIR"
+fi
 source .env
 DIR="backups/$(date '+%Y%m%d_%H%M%S')"
 mkdir -p "$DIR"

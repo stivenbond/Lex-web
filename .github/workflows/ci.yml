@@ -57,6 +57,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: "20", cache: "npm", cache-dependency-path: client/package-lock.json }
+      - uses: actions/cache@v4
+        with:
+          path: client/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('client/package-lock.json') }}-${{ hashFiles('client/**/*.js', 'client/**/*.jsx', 'client/**/*.ts', 'client/**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('client/package-lock.json') }}-
       - run: npm ci
         working-directory: client
       - run: npx tsc --noEmit
@@ -69,9 +75,13 @@ jobs:
         working-directory: client
 
   docker:
-    name: Validate Dockerfiles
+    name: Validate Dockerfiles & Compose
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate Docker Compose
+        run: |
+          cp infra/.env.template infra/.env
+          docker compose -f infra/docker-compose.yml config -q
       - run: docker build -f src/Host/Lex.API/Dockerfile . -t lex-api:ci
       - run: docker build -f client/Dockerfile client/ -t lex-web:ci

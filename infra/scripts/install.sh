@@ -1,16 +1,36 @@
 #!/usr/bin/env bash
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$(dirname "$SCRIPT_DIR")"
+if [[ "$(basename "$SCRIPT_DIR")" == "scripts" ]]; then
+  cd "$(dirname "$SCRIPT_DIR")"
+else
+  cd "$SCRIPT_DIR"
+fi
 
 command -v docker &>/dev/null        || { echo "ERROR: docker not found."; exit 1; }
 command -v docker compose &>/dev/null || { echo "ERROR: docker compose not found."; exit 1; }
 
-[[ -f .env ]] || { cp .env.template .env; echo "Created .env — fill in values then re-run."; exit 0; }
+[[ -f .env ]] || {
+  echo "Creating .env from template..."
+  cp .env.template .env
+  
+  # Auto-generate secure passwords if they are left as change-me
+  sed -i "s/^DB_PASSWORD=change-me/DB_PASSWORD=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c 20)/" .env
+  sed -i "s/^RABBITMQ_PASSWORD=change-me/RABBITMQ_PASSWORD=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c 20)/" .env
+  sed -i "s/^KEYCLOAK_ADMIN_PASSWORD=change-me/KEYCLOAK_ADMIN_PASSWORD=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c 20)/" .env
+  sed -i "s/^MINIO_ACCESS_KEY=minioadmin/MINIO_ACCESS_KEY=$(openssl rand -base64 12 | tr -dc 'a-zA-Z0-9' | head -c 16)/" .env
+  sed -i "s/^MINIO_SECRET_KEY=minioadmin/MINIO_SECRET_KEY=$(openssl rand -base64 24 | tr -dc 'a-zA-Z0-9' | head -c 32)/" .env
+  
+  echo "Auto-generated secure credentials in .env file."
+}
 
 source .env
 for v in DB_PASSWORD RABBITMQ_PASSWORD KEYCLOAK_ADMIN_PASSWORD MINIO_ACCESS_KEY MINIO_SECRET_KEY; do
   [[ -n "${!v:-}" ]] || { echo "ERROR: $v not set in .env"; exit 1; }
+  if [[ "${!v}" == "change-me" || "${!v}" == "minioadmin" ]]; then
+    echo "ERROR: $v is still set to the default value. Please change it in .env."
+    exit 1
+  fi
 done
 
 docker compose pull
@@ -43,12 +63,18 @@ echo "  ✓ api"
 docker compose up -d web
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo " Lex installed!"
+echo " Lex Platform installed successfully!"
+echo ""
+echo " Access Points:"
 echo "  App       : http://localhost"
-echo "  Keycloak  : http://localhost:8080  (admin / ${KEYCLOAK_ADMIN_PASSWORD})"
-echo "  MinIO     : http://localhost:9001  (${MINIO_ACCESS_KEY})"
+echo "  Keycloak  : http://localhost:8080"
+echo "  MinIO     : http://localhost:9001"
 echo "  Seq       : http://localhost:8083"
 echo "  RabbitMQ  : http://localhost:15672"
 echo ""
-echo "  ⚠  Change Keycloak admin password immediately."
+echo " Generated Credentials (saved in infra/.env):"
+echo "  Keycloak Admin : admin / ${KEYCLOAK_ADMIN_PASSWORD}"
+echo "  MinIO User     : ${MINIO_ACCESS_KEY} / ${MINIO_SECRET_KEY}"
+echo "  RabbitMQ User  : lex / ${RABBITMQ_PASSWORD}"
+echo "  Postgres User  : lex / ${DB_PASSWORD}"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
