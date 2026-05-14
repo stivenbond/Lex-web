@@ -18,17 +18,24 @@ jobs:
     services:
       postgres:
         image: postgres:16-alpine
-        env: { POSTGRES_DB: lex_test, POSTGRES_USER: lex, POSTGRES_PASSWORD: testpassword }
-        ports: ["5432:5432"]
+        env:
+          POSTGRES_DB: lex_test
+          POSTGRES_USER: lex
+          POSTGRES_PASSWORD: testpassword
+        ports:
+          - "5432:5432"
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
       rabbitmq:
         image: rabbitmq:3-alpine
-        ports: ["5672:5672"]
-        options: --health-cmd "rabbitmq-diagnostics ping" --health-interval 10s --health-timeout 5s --health-retries 5
+        ports:
+          - "5672:5672"
+        options:
+          --health-cmd "rabbitmq-diagnostics ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
-        with: { global-json-file: global.json }
+        with:
+          global-json-file: global.json
       - uses: actions/cache@v4
         with:
           path: ~/.nuget/packages
@@ -48,7 +55,8 @@ jobs:
           dotnet tool install -g dotnet-format
           dotnet format Lex.slnx --verify-no-changes
       - uses: codecov/codecov-action@v4
-        with: { files: "**/coverage.cobertura.xml" }
+        with: 
+          files: "**/coverage.cobertura.xml"
 
   client:
     name: Next.js Build & Test
@@ -56,7 +64,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: "20", cache: "npm", cache-dependency-path: client/package-lock.json }
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: client/package-lock.json
       - uses: actions/cache@v4
         with:
           path: client/.next/cache
