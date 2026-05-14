@@ -17,9 +17,9 @@ jobs:
         with: { registry: ghcr.io, username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}" }
       - id: meta
         run: echo "sha=${GITHUB_SHA::8}" >> "$GITHUB_OUTPUT"
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v7
         with: { context: ".", file: src/Host/Lex.API/Dockerfile, push: true, tags: "${{ env.IMAGE_API }}:${{ steps.meta.outputs.sha }},${{ env.IMAGE_API }}:staging" }
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v7
         with: { context: client, file: client/Dockerfile, push: true, tags: "${{ env.IMAGE_WEB }}:${{ steps.meta.outputs.sha }},${{ env.IMAGE_WEB }}:staging" }
   deploy:
     needs: build-push
