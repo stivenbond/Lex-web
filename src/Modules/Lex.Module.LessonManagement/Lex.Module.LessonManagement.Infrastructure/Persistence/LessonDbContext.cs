@@ -13,18 +13,21 @@ public sealed class LessonDbContext(DbContextOptions<LessonDbContext> options) :
     {
         modelBuilder.HasDefaultSchema("lessons");
 
+        modelBuilder.Entity<ContentBlock>()
+            .HasDiscriminator(x => x.Type)
+            .HasValue<TextBlock>("Text")
+            .HasValue<VideoBlock>("Video");
+
         modelBuilder.Entity<Lesson>(builder =>
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Title).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Description).HasMaxLength(2000);
             
-            // Store blocks as JSON for maximum flexibility in this MVP stage
-            builder.Property(x => x.Blocks)
-                .HasConversion(
-                    v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
-                    v => JsonSerializer.Deserialize<List<ContentBlock>>(v, (JsonSerializerOptions?)null) ?? new List<ContentBlock>())
-                .HasColumnType("jsonb");
+            builder.HasMany(x => x.Blocks)
+                .WithOne()
+                .HasForeignKey("LessonId")
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         base.OnModelCreating(modelBuilder);

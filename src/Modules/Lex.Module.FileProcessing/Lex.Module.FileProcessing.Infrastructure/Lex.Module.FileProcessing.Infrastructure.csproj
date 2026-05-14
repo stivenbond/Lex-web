@@ -10,12 +10,12 @@
     <ProjectReference Include="..\..\..\Core\Lex.Infrastructure\Lex.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore"          Version="8.*" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"  Version="8.*" />
-    <PackageReference Include="MassTransit.RabbitMQ"                   Version="8.*" />
-    <PackageReference Include="itext7"                                 Version="8.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0-*" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0-*" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.*" />
+    <PackageReference Include="itext7" Version="8.*" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.*" />
-    <PackageReference Include="Refit.HttpClientFactory"                Version="7.*" />
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience"   Version="8.*" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="7.*" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.*" />
   </ItemGroup>
 </Project>

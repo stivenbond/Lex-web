@@ -11,10 +11,21 @@ public abstract class BaseDbContext<TContext>(DbContextOptions<TContext> options
     {
         base.OnModelCreating(modelBuilder);
 
-        foreach (var entity in modelBuilder.Model.GetEntityTypes())
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
-            modelBuilder.Entity(entity.Name).Property<DateTimeOffset>("CreatedAt");
-            modelBuilder.Entity(entity.Name).Property<DateTimeOffset>("UpdatedAt");
+            if (entityType.IsOwned()) continue;
+
+            var clrType = entityType.ClrType;
+            if (clrType == null) continue;
+
+            if (clrType.GetProperty("CreatedAt") == null)
+            {
+                modelBuilder.Entity(clrType).Property<DateTimeOffset>("CreatedAt");
+            }
+            if (clrType.GetProperty("UpdatedAt") == null)
+            {
+                modelBuilder.Entity(clrType).Property<DateTimeOffset>("UpdatedAt");
+            }
         }
 
         // Apply global conventions
@@ -68,12 +79,26 @@ public abstract class BaseDbContext<TContext>(DbContextOptions<TContext> options
 
         foreach (var entry in entries)
         {
+            var now = DateTimeOffset.UtcNow;
+
             if (entry.State == EntityState.Added)
             {
-                entry.Property("CreatedAt").CurrentValue = DateTimeOffset.UtcNow;
+                var createdAtProp = entry.Metadata.FindProperty("CreatedAt");
+                if (createdAtProp != null)
+                {
+                    entry.Property("CreatedAt").CurrentValue = createdAtProp.ClrType == typeof(DateTime) 
+                        ? now.UtcDateTime 
+                        : now;
+                }
             }
-            
-            entry.Property("UpdatedAt").CurrentValue = DateTimeOffset.UtcNow;
+
+            var updatedAtProp = entry.Metadata.FindProperty("UpdatedAt");
+            if (updatedAtProp != null)
+            {
+                entry.Property("UpdatedAt").CurrentValue = updatedAtProp.ClrType == typeof(DateTime) 
+                    ? now.UtcDateTime 
+                    : now;
+            }
         }
     }
 

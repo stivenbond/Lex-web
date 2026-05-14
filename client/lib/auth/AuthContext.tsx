@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useRef } from "react";
 import Keycloak from "keycloak-js";
 import { tokenManager } from "./tokenManager";
 import { useAuthStore } from "../store/useAuthStore";
@@ -16,6 +16,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [initialized, setInitialized] = useState(false);
   const { setUser, clearUser } = useAuthStore();
+  const keycloakRef = useRef<Keycloak | null>(null);
 
   useEffect(() => {
     const keycloak = new Keycloak({
@@ -23,6 +24,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM || "lex",
       clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID || "lex-web",
     });
+
+    keycloakRef.current = keycloak;
 
     keycloak
       .init({
@@ -70,14 +73,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [setUser, clearUser]);
 
   const login = () => {
-    // This is a simplified version, ideally you'd use the keycloak instance from state
-    window.location.href = "/auth/login"; // Or trigger keycloak.login()
+    keycloakRef.current?.login();
   };
 
   const logout = () => {
     tokenManager.clearTokens();
     clearUser();
-    // Trigger keycloak logout if needed
+    keycloakRef.current?.logout({ redirectUri: typeof window !== "undefined" ? window.location.origin : undefined });
   };
 
   return (

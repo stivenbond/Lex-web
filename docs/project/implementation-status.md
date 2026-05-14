@@ -1,6 +1,6 @@
 # Implementation Status
 
-Date: 2026-04-25
+Date: 2026-05-14
 
 This document is the single source of truth for implementation status in this repository.
 
@@ -17,31 +17,27 @@ Specs existing in `docs/specs/` or module folders do not count as implementation
 
 | Area | Status | Notes |
 |---|---|---|
-| Shared kernel | Partial | Core primitives exist, but some abstractions and shared modeling remain uneven across modules. |
-| Host/API | Partial | App boots and Swagger is wired in development, but readiness, deployment, and endpoint completeness are not fully verified. |
-| Scheduling | Partial | Strongest implemented module; core domain, handlers, infrastructure, and tests exist, but migration/schema completion is still missing. |
-| DiaryManagement | Partial | Domain, controller, and DbContext exist, but schema/migrations and fuller workflow completion are missing. |
-| LessonManagement | Partial | Domain model and basic infrastructure exist, but implementation depth is limited and code structure needs cleanup. |
-| AssessmentCreation | Partial | Core/domain/infrastructure slices exist, but repository, schema, and end-to-end flow are not complete. |
-| AssessmentDelivery | Partial | Domain and controller skeletons exist, but grading/session flow is not production-complete. |
-| FileProcessing | Partial | Background processing skeleton exists, but schema, workflow coverage, and integration validation remain incomplete. |
-| Notifications | Partial | Basic domain and DbContext exist, but end-to-end event mapping and delivery flows are not verified. |
-| Reporting | Spec Only / Partial | Specs are present, but read-model implementation depth and schema maturity are limited. |
-| GoogleIntegration | Partial | Service and handler skeletons exist, but OAuth, resilience, and persistence are incomplete. |
-| ImportExport | Partial | Orchestration intent is documented, but handlers and persistence remain early-stage. |
-| ObjectStorage | Partial | Service, provider abstractions, and controller exist, but provider completeness and operational validation are still needed. |
-| Frontend shell | Partial | Next.js app structure, auth plumbing, and route scaffolds exist, but many routes remain placeholders. |
+| Shared kernel | Done | Core primitives and BaseDbContext established with consistent audit logging and snake_case conventions. |
+| Host/API | Done | Containerized, health checks fixed, module registration verified, and initial migrations generated for all modules. |
+| Scheduling | Done | Full vertical slice with initial migrations and domain logic. |
+| DiaryManagement | Done | Domain, persistence, and migrations complete. |
+| LessonManagement | Done | Switched to TPH for lesson blocks; persistence and migrations complete. |
+| AssessmentCreation | Partial | Core/domain/infrastructure slices exist, but repository and end-to-end flow are not complete. |
+| AssessmentDelivery | Partial | Migrations generated; grading/session flow still needs production-level depth. |
+| FileProcessing | Partial | Background processing skeleton and migrations exist, but workflow coverage remains incomplete. |
+| Notifications | Partial | Domain, DbContext, and migrations exist; event delivery flows still unverified. |
+| Reporting | Partial | Migrations generated; read-model implementation depth remains limited. |
+| GoogleIntegration | Partial | Persistence and migrations complete; OAuth flow and resilience still unverified. |
+| ImportExport | Partial | Persistence and migrations complete; handlers remain early-stage. |
+| ObjectStorage | Partial | Persistence and migrations complete; operational validation needed. |
+| Frontend shell | Done | Routes implemented using shadcn/ui; Keycloak auth flow fixed and verified in AuthContext. |
 | Integration tests | Partial | Some architecture/module tests exist, but broad system validation is not complete. |
-| CI/CD | Partial | GitHub workflows exist, but reliability is not established and release packaging has configuration gaps. |
-| Deployment docs | Partial | Base materials exist, but they were overstating readiness and required reconciliation with actual repo state. |
+| CI/CD | Partial | GitHub workflows exist, but release packaging has configuration gaps. |
+| Deployment docs | Done | .env template and Docker Compose verified. |
 
 ## Confirmed Gaps
 
-- Database migrations are not present for the module DbContexts that claim schema ownership.
-- Several modules have controller/service/DbContext shells without end-to-end behavior behind them.
-- Some docs claimed successful builds, completed validation, or completed phases without current verification.
-- Specs were split across `docs/specs/`, module folders, and legacy `.agents` material.
-- Agent workflow guidance was fragmented and platform-specific.
+- Several modules have migrations but lack full end-to-end behavior behind them.
 - CI/CD configuration references artifacts that were missing from the repo.
 
 ## Quality Concerns Found

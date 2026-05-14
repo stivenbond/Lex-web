@@ -20,7 +20,11 @@
     <ProjectReference Include="..\..\Modules\Lex.Module.Notifications\Lex.Module.Notifications.Infrastructure\Lex.Module.Notifications.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Yarp.ReverseProxy"          Version="2.*" />
-    <PackageReference Include="Swashbuckle.AspNetCore"      Version="6.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Yarp.ReverseProxy" Version="2.*" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.*" />
   </ItemGroup>
 </Project>

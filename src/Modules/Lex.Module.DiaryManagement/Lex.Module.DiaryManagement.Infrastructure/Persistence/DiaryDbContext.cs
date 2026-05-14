@@ -26,6 +26,7 @@ public sealed class DiaryDbContext(DbContextOptions<DiaryDbContext> options)
                 a.WithOwner().HasForeignKey("DiaryEntryId");
                 a.Property<Guid>("Id");
                 a.HasKey("Id");
+                a.Property(x => x.FileId).IsRequired();
                 a.Property(x => x.FileName).IsRequired().HasMaxLength(255);
                 a.ToTable("diary_attachments");
             });

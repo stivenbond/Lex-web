@@ -121,9 +121,13 @@ public static class InfrastructureServiceRegistration
 
     private static WebApplicationBuilder AddLexHealthChecks(this WebApplicationBuilder builder)
     {
+        var rabbitHost = builder.Configuration["RabbitMq:Host"] ?? "localhost";
+        var rabbitUser = builder.Configuration["RabbitMq:Username"] ?? "guest";
+        var rabbitPass = builder.Configuration["RabbitMq:Password"] ?? "guest";
+
         builder.Services.AddHealthChecks()
             .AddNpgSql(builder.Configuration.GetConnectionString("Default")!)
-            .AddRabbitMQ(new Uri(builder.Configuration.GetConnectionString("RabbitMQ") ?? "amqp://guest:guest@localhost:5672"))
+            .AddRabbitMQ(new Uri($"amqp://{rabbitUser}:{rabbitPass}@{rabbitHost}:5672"))
             .AddRedis(builder.Configuration.GetConnectionString("Redis") ?? "redis:6379", "redis");
         return builder;
     }
