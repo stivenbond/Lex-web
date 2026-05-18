@@ -18,6 +18,8 @@ public static class GoogleIntegrationServiceRegistration
         services.AddValidatorsFromAssembly(typeof(GoogleIntegrationPermissions).Assembly);
         
         services.AddScoped<Lex.Module.GoogleIntegration.Core.Abstractions.IGoogleDriveService, Lex.Module.GoogleIntegration.Infrastructure.Services.GoogleDriveService>();
+        services.AddScoped<Lex.Module.GoogleIntegration.Core.Domain.IGoogleRepository>(
+            sp => sp.GetRequiredService<Lex.Module.GoogleIntegration.Persistence.GoogleIntegrationDbContext>());
 
         return services;
     }

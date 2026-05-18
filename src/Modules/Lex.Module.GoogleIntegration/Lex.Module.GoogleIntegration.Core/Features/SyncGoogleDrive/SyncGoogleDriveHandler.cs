@@ -5,8 +5,6 @@ using Lex.Module.GoogleIntegration.Core.Abstractions;
 
 namespace Lex.Module.GoogleIntegration.Core.Features.SyncGoogleDrive;
 
-public record SyncGoogleDriveCommand(string AccessToken) : IRequest<Result<int>>;
-
 internal sealed class SyncGoogleDriveHandler(
     IGoogleDriveService googleService,
     IObjectStorageService storageService,
@@ -49,3 +47,4 @@ internal sealed class SyncGoogleDriveHandler(
         return count;
     }
 }
+

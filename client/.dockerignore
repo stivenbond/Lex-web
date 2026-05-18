@@ -1,0 +1,12 @@
+.git
+.vs
+.idea
+node_modules
+.next
+.turbo
+dist
+.npm-cache
+*.user
+*.log
+coverage
+.env
