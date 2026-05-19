@@ -56,12 +56,12 @@ public class Slot
     /// <summary>
     /// UTC timestamp when this was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
     /// UTC timestamp when this was last modified.
     /// </summary>
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
 
     public Slot() { }
 
@@ -90,8 +90,8 @@ public class Slot
             EndTime = endTime,
             DurationMinutes = durationMinutes,
             SlotNumber = slotNumber,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
         };
     }
 
@@ -102,7 +102,7 @@ public class Slot
     {
         ArgumentNullException.ThrowIfNull(period);
         _periods.Add(period);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public class Slot
     {
         ArgumentNullException.ThrowIfNull(period);
         _periods.Remove(period);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 
     /// <summary>

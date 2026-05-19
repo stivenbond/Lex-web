@@ -43,12 +43,12 @@ public class AcademicYear
     /// <summary>
     /// UTC timestamp when this was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
     /// UTC timestamp when this was last modified.
     /// </summary>
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
 
     public AcademicYear() { }
 
@@ -67,8 +67,8 @@ public class AcademicYear
             StartDate = startDate,
             EndDate = endDate,
             IsActive = false,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
         };
     }
 
@@ -79,7 +79,7 @@ public class AcademicYear
     {
         ArgumentNullException.ThrowIfNull(term);
         _terms.Add(term);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 
     /// <summary>
@@ -89,6 +89,6 @@ public class AcademicYear
     {
         ArgumentNullException.ThrowIfNull(term);
         _terms.Remove(term);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 }

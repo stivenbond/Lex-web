@@ -50,12 +50,12 @@ public class Term
     /// <summary>
     /// UTC timestamp when this was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
     /// UTC timestamp when this was last modified.
     /// </summary>
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
 
     public Term() { }
 
@@ -76,8 +76,8 @@ public class Term
             StartDate = startDate,
             EndDate = endDate,
             IsActive = false,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
         };
     }
 
@@ -88,7 +88,7 @@ public class Term
     {
         ArgumentNullException.ThrowIfNull(slot);
         _slots.Add(slot);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 
     /// <summary>
@@ -98,6 +98,6 @@ public class Term
     {
         ArgumentNullException.ThrowIfNull(slot);
         _slots.Remove(slot);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 }

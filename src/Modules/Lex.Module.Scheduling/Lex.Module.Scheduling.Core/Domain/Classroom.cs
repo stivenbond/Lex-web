@@ -42,12 +42,12 @@ public class Classroom
     /// <summary>
     /// UTC timestamp when this was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
     /// UTC timestamp when this was last modified.
     /// </summary>
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
 
     public Classroom() { }
 
@@ -65,8 +65,8 @@ public class Classroom
             Capacity = capacity,
             Facilities = facilities,
             IsActive = true,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
         };
     }
 
@@ -77,7 +77,7 @@ public class Classroom
     {
         ArgumentNullException.ThrowIfNull(period);
         _periods.Add(period);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 
     /// <summary>
@@ -87,6 +87,6 @@ public class Classroom
     {
         ArgumentNullException.ThrowIfNull(period);
         _periods.Remove(period);
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 }

@@ -66,12 +66,12 @@ public class Period
     /// <summary>
     /// UTC timestamp when this was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
     /// UTC timestamp when this was last modified.
     /// </summary>
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
 
     public Period() { }
 
@@ -103,8 +103,8 @@ public class Period
             TeacherName = teacherName,
             IsActive = true,
             Notes = notes,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
         };
     }
 
@@ -126,7 +126,7 @@ public class Period
         }
 
         Notes = notes;
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 
     /// <summary>
