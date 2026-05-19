@@ -188,7 +188,7 @@ public sealed class SlotDomainTests
     {
         var slot = Slot.Create(1, DayOfWeek.Monday, new TimeOnly(8, 0), new TimeOnly(8, 45), 1);
         var section = Section.Create("9A");
-        var classroom = Classroom.Create("A101", 30);
+        var classroom = Classroom.Create("A101", capacity: 30);
         var period = Period.Create(1, 1, 1, "Math", "teacher-1");
 
         slot.AddPeriod(period);
@@ -273,7 +273,7 @@ public sealed class PeriodDomainTests
         slot.Id = 1;
         var section = Section.Create("9A");
         section.Id = 1;
-        var classroom = Classroom.Create("A101", 30);
+        var classroom = Classroom.Create("A101", capacity: 30);
         classroom.Id = 1;
 
         var period = Period.Create(slot.Id, section.Id, classroom.Id, "Mathematics", "teacher-1", "Prof. Smith");
