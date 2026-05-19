@@ -74,6 +74,11 @@ public class Slot
         ArgumentOutOfRangeException.ThrowIfLessThan((int)dayOfWeek, 0, nameof(dayOfWeek));
         ArgumentOutOfRangeException.ThrowIfLessThan(slotNumber, 1, nameof(slotNumber));
 
+        if (endTime < startTime)
+        {
+            throw new ArgumentOutOfRangeException(nameof(endTime), "End time cannot be before start time.");
+        }
+
         var durationMinutes = (int)(endTime - startTime).TotalMinutes;
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(durationMinutes, 0, nameof(endTime));
 

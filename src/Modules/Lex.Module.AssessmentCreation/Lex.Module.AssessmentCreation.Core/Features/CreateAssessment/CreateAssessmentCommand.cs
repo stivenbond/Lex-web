@@ -6,7 +6,7 @@ namespace Lex.Module.AssessmentCreation.Core.Features.CreateAssessment;
 
 public sealed record CreateAssessmentCommand(string Title) : IRequest<Result<Guid>>;
 
-public sealed class CreateAssessmentCommandHandler(IAssessmentRepository repository) : IRequestHandler<CreateAssessmentCommand, Result<Guid>>
+internal sealed class CreateAssessmentCommandHandler(IAssessmentRepository repository) : IRequestHandler<CreateAssessmentCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateAssessmentCommand request, CancellationToken cancellationToken)
     {

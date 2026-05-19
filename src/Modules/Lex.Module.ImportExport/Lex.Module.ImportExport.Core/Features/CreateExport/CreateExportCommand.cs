@@ -6,7 +6,7 @@ namespace Lex.Module.ImportExport.Core.Features.CreateExport;
 
 public sealed record CreateExportCommand(string Type) : IRequest<Result<Guid>>;
 
-public sealed class CreateExportCommandHandler(IImportExportRepository repository) : IRequestHandler<CreateExportCommand, Result<Guid>>
+internal sealed class CreateExportCommandHandler(IImportExportRepository repository) : IRequestHandler<CreateExportCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateExportCommand request, CancellationToken cancellationToken)
     {
