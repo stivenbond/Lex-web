@@ -1,4 +1,5 @@
 namespace Lex.SharedKernel.Abstractions;
+
 public interface ICurrentUser
 {
     Guid Id { get; }

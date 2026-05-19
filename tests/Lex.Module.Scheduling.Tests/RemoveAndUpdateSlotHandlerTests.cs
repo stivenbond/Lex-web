@@ -91,11 +91,11 @@ public sealed class UpdateSlotHandlerTests
         repository.Setup(x => x.GetPeriodByIdAsync(20, It.IsAny<CancellationToken>()))
             .ReturnsAsync(period);
         repository.Setup(x => x.HasConflictingPeriodAsync(
-                period.SlotId, 
-                5, 
-                3, 
-                "teacher-new", 
-                20, 
+                period.SlotId,
+                5,
+                3,
+                "teacher-new",
+                20,
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
         repository.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
@@ -127,11 +127,11 @@ public sealed class UpdateSlotHandlerTests
         repository.Setup(x => x.GetPeriodByIdAsync(21, It.IsAny<CancellationToken>()))
             .ReturnsAsync(period);
         repository.Setup(x => x.HasConflictingPeriodAsync(
-                period.SlotId, 
-                6, 
-                4, 
-                "teacher-conflict", 
-                21, 
+                period.SlotId,
+                6,
+                4,
+                "teacher-conflict",
+                21,
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 

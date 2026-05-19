@@ -29,10 +29,10 @@ public sealed class AssessmentSession : AggregateRoot
     public void SaveAnswer(string questionId, string content)
     {
         if (Status != SessionStatus.InProgress) return;
-        
+
         var existing = _answers.FirstOrDefault(a => a.QuestionId == questionId);
         if (existing != null) _answers.Remove(existing);
-        
+
         _answers.Add(new Answer(questionId, content));
     }
 

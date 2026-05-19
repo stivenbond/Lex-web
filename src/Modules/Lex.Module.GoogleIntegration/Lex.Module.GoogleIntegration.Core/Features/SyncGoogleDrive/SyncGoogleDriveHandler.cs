@@ -35,9 +35,9 @@ internal sealed class SyncGoogleDriveHandler(
             if (downloadResult.IsFailure) continue;
 
             var uploadResult = await storageService.UploadAsync(
-                downloadResult.Value!, 
-                file.Name, 
-                file.MimeType, 
+                downloadResult.Value!,
+                file.Name,
+                file.MimeType,
                 ct);
 
             if (uploadResult.IsSuccess) count++;

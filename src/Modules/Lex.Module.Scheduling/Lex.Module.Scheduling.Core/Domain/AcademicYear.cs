@@ -9,7 +9,7 @@ public class AcademicYear
     private List<Term> _terms = [];
 
     public int Id { get; set; }
-    
+
     /// <summary>
     /// Display name (e.g., "2024-2025", "Class of 2024").
     /// </summary>

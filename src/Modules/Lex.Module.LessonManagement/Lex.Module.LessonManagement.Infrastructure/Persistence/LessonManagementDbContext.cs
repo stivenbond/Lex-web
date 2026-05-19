@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 namespace Lex.Module.LessonManagement.Persistence;
+
 public sealed class LessonManagementDbContext : DbContext
 {
     public LessonManagementDbContext(DbContextOptions<LessonManagementDbContext> options) : base(options) { }

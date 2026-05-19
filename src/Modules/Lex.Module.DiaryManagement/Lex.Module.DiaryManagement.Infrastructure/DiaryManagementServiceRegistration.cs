@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.DiaryManagement;
+
 public static class DiaryManagementServiceRegistration
 {
     public static IServiceCollection AddDiaryManagementModule(
@@ -16,7 +17,7 @@ public static class DiaryManagementServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(DiaryManagementPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(DiaryManagementPermissions).Assembly);
-        services.AddScoped<Lex.Module.DiaryManagement.Core.Domain.IDiaryRepository>(sp => 
+        services.AddScoped<Lex.Module.DiaryManagement.Core.Domain.IDiaryRepository>(sp =>
             sp.GetRequiredService<Lex.Module.DiaryManagement.Persistence.DiaryDbContext>());
 
         return services;

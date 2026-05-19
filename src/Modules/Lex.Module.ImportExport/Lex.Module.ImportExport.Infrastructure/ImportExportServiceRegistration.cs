@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.ImportExport;
+
 public static class ImportExportServiceRegistration
 {
     public static IServiceCollection AddImportExportModule(

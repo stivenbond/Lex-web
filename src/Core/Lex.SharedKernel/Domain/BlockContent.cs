@@ -11,10 +11,10 @@ public sealed record BlockContent(IReadOnlyList<ContentBlock> Blocks)
 }
 
 public sealed record ContentBlock(
-    Guid   Id,
+    Guid Id,
     string Type,       // "paragraph"|"heading"|"bullet"|"node"|"edge"|"image"
     string? Text,
-    Guid?  ParentId,   // null = root; set for nested/diagram children
-    int    Order,
+    Guid? ParentId,   // null = root; set for nested/diagram children
+    int Order,
     IReadOnlyDictionary<string, string>? Metadata  // extensible per block type
 );

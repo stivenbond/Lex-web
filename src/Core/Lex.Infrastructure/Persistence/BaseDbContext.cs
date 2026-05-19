@@ -30,7 +30,7 @@ public abstract class BaseDbContext<TContext>(DbContextOptions<TContext> options
 
         // Apply global conventions
         ApplySnakeCaseNaming(modelBuilder);
-        
+
         // Apply configurations from the assembly
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
     }
@@ -86,8 +86,8 @@ public abstract class BaseDbContext<TContext>(DbContextOptions<TContext> options
                 var createdAtProp = entry.Metadata.FindProperty("CreatedAt");
                 if (createdAtProp != null)
                 {
-                    entry.Property("CreatedAt").CurrentValue = createdAtProp.ClrType == typeof(DateTime) 
-                        ? now.UtcDateTime 
+                    entry.Property("CreatedAt").CurrentValue = createdAtProp.ClrType == typeof(DateTime)
+                        ? now.UtcDateTime
                         : now;
                 }
             }
@@ -95,8 +95,8 @@ public abstract class BaseDbContext<TContext>(DbContextOptions<TContext> options
             var updatedAtProp = entry.Metadata.FindProperty("UpdatedAt");
             if (updatedAtProp != null)
             {
-                entry.Property("UpdatedAt").CurrentValue = updatedAtProp.ClrType == typeof(DateTime) 
-                    ? now.UtcDateTime 
+                entry.Property("UpdatedAt").CurrentValue = updatedAtProp.ClrType == typeof(DateTime)
+                    ? now.UtcDateTime
                     : now;
             }
         }
@@ -105,7 +105,7 @@ public abstract class BaseDbContext<TContext>(DbContextOptions<TContext> options
     private static string ToSnakeCase(string input)
     {
         if (string.IsNullOrEmpty(input)) return input;
-        
+
         var result = new System.Text.StringBuilder();
         for (var i = 0; i < input.Length; i++)
         {

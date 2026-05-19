@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.LessonManagement;
+
 public static class LessonManagementServiceRegistration
 {
     public static IServiceCollection AddLessonManagementModule(

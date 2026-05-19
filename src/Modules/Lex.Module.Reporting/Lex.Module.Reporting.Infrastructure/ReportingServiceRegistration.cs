@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.Reporting;
+
 public static class ReportingServiceRegistration
 {
     public static IServiceCollection AddReportingModule(

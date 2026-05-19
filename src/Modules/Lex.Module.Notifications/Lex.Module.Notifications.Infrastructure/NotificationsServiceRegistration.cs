@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.Notifications;
+
 public static class NotificationsServiceRegistration
 {
     public static IServiceCollection AddNotificationsModule(

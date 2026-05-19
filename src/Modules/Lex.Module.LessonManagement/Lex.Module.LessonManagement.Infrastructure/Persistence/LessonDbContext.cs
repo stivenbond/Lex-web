@@ -23,7 +23,7 @@ public sealed class LessonDbContext(DbContextOptions<LessonDbContext> options) :
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Title).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Description).HasMaxLength(2000);
-            
+
             builder.HasMany(x => x.Blocks)
                 .WithOne()
                 .HasForeignKey("LessonId")

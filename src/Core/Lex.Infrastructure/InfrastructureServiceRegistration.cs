@@ -86,15 +86,18 @@ public static class InfrastructureServiceRegistration
         builder.Services.AddAuthentication().AddJwtBearer(o =>
         {
             o.Authority = builder.Configuration["Keycloak:Authority"];
-            o.Audience  = builder.Configuration["Keycloak:ClientId"];
+            o.Audience = builder.Configuration["Keycloak:ClientId"];
             o.RequireHttpsMetadata = false;
-            o.Events = new() { OnMessageReceived = ctx =>
+            o.Events = new()
+            {
+                OnMessageReceived = ctx =>
             {
                 var token = ctx.Request.Query["access_token"];
                 if (!string.IsNullOrEmpty(token) && ctx.HttpContext.Request.Path.StartsWithSegments("/hubs"))
                     ctx.Token = token;
                 return Task.CompletedTask;
-            }};
+            }
+            };
         });
         builder.Services.AddAuthorization();
         return builder;

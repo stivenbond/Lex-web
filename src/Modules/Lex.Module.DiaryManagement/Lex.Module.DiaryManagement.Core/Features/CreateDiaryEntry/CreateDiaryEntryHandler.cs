@@ -6,7 +6,7 @@ namespace Lex.Module.DiaryManagement.Core.Features.CreateDiaryEntry;
 
 public record CreateDiaryEntryCommand(string Title, string Content, DateTime Date, List<Guid>? AttachmentIds = null) : IRequest<Result<Guid>>;
 
-internal sealed class CreateDiaryEntryHandler(IDiaryRepository repository) 
+internal sealed class CreateDiaryEntryHandler(IDiaryRepository repository)
     : IRequestHandler<CreateDiaryEntryCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateDiaryEntryCommand request, CancellationToken ct)

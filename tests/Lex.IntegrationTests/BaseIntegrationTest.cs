@@ -37,9 +37,9 @@ public abstract class BaseIntegrationTest : IAsyncLifetime
                     // Override connection string for all DbContexts
                     // In a real modular monolith, we use the same connection string for simplicity in testing
                     services.RemoveAll(typeof(DbContextOptions));
-                    
+
                     var connectionString = _dbContainer.GetConnectionString();
-                    
+
                     // Here we would ideally re-register all module DbContexts. 
                     // For this MVP, we'll assume they all use the same 'Default' connection string from IConfiguration.
                     // We can also use a custom IConfiguration here.
@@ -48,7 +48,7 @@ public abstract class BaseIntegrationTest : IAsyncLifetime
 
         Client = factory.CreateClient();
         ServiceProvider = factory.Services;
-        
+
         // Setup Respawn
         _respawner = await Respawner.CreateAsync(_dbContainer.GetConnectionString(), new RespawnerOptions
         {

@@ -4,7 +4,7 @@ using Lex.Module.DiaryManagement.Core.Domain;
 
 namespace Lex.Module.DiaryManagement.Persistence;
 
-public sealed class DiaryDbContext(DbContextOptions<DiaryDbContext> options) 
+public sealed class DiaryDbContext(DbContextOptions<DiaryDbContext> options)
     : BaseDbContext<DiaryDbContext>(options), IDiaryRepository
 {
     public DbSet<DiaryEntry> DiaryEntries => Set<DiaryEntry>();
@@ -14,13 +14,13 @@ public sealed class DiaryDbContext(DbContextOptions<DiaryDbContext> options)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("diary");
-        
+
         modelBuilder.Entity<DiaryEntry>(builder =>
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Title).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Content).IsRequired();
-            
+
             builder.OwnsMany(x => x.Attachments, a =>
             {
                 a.WithOwner().HasForeignKey("DiaryEntryId");

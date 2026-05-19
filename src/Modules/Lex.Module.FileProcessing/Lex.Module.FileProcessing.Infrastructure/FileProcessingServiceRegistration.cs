@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.FileProcessing;
+
 public static class FileProcessingServiceRegistration
 {
     public static IServiceCollection AddFileProcessingModule(
@@ -16,7 +17,7 @@ public static class FileProcessingServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(FileProcessingPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(FileProcessingPermissions).Assembly);
-        
+
         services.AddScoped<Lex.Module.FileProcessing.Core.Abstractions.IFileProcessor, Lex.Module.FileProcessing.Infrastructure.Processors.PdfFileProcessor>();
 
         return services;

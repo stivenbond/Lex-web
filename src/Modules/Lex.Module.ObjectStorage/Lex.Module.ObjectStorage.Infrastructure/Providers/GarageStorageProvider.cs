@@ -11,7 +11,7 @@ internal sealed class GarageStorageProvider(IMinioClient minioClient, string buc
         try
         {
             var key = id.ToString();
-            
+
             // Ensure bucket exists (simplified for now, usually done at startup)
             var beArgs = new BucketExistsArgs().WithBucket(bucketName);
             bool found = await minioClient.BucketExistsAsync(beArgs, ct);

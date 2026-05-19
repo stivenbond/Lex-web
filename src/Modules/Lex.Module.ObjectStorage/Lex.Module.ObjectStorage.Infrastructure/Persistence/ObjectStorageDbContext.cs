@@ -14,7 +14,7 @@ public sealed class ObjectStorageDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("objectstorage");
-        
+
         modelBuilder.Entity<FileRecord>(builder =>
         {
             builder.HasKey(x => x.Id);

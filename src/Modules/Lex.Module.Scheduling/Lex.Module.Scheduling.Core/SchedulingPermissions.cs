@@ -1,4 +1,5 @@
 namespace Lex.Module.Scheduling;
+
 public static class SchedulingPermissions
 {
     private const string Prefix = "scheduling";

@@ -4,7 +4,7 @@ using Lex.Module.AssessmentDelivery.Core.Domain;
 
 namespace Lex.Module.AssessmentDelivery.Persistence;
 
-public sealed class AssessmentDeliveryDbContext(DbContextOptions<AssessmentDeliveryDbContext> options) 
+public sealed class AssessmentDeliveryDbContext(DbContextOptions<AssessmentDeliveryDbContext> options)
     : BaseDbContext<AssessmentDeliveryDbContext>(options), IDeliveryRepository
 {
     public DbSet<AssessmentSession> Sessions => Set<AssessmentSession>();
@@ -20,7 +20,7 @@ public sealed class AssessmentDeliveryDbContext(DbContextOptions<AssessmentDeliv
             builder.HasKey(x => x.Id);
             builder.Property(x => x.StudentId).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Status).HasConversion<string>();
-            
+
             builder.OwnsMany(x => x.Answers, a =>
             {
                 a.WithOwner().HasForeignKey("SessionId");

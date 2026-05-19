@@ -2,6 +2,7 @@ using Lex.Module.AssessmentCreation.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lex.Module.AssessmentCreation.Persistence;
+
 public sealed class AssessmentCreationDbContext : DbContext, IAssessmentRepository
 {
     public DbSet<AssessmentSnapshot> Snapshots => Set<AssessmentSnapshot>();

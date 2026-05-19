@@ -28,7 +28,7 @@ internal sealed class EnqueueProcessingHandler(
         _ = Task.Run(async () =>
         {
             await jobTracker.StartJobAsync(jobId, $"Processing {request.FileName}");
-            
+
             await jobTracker.UpdateProgressAsync(jobId, 10, "Downloading file...");
             var downloadResult = await storageService.DownloadAsync(request.FileId, ct);
             if (downloadResult.IsFailure)
@@ -47,7 +47,7 @@ internal sealed class EnqueueProcessingHandler(
 
             await jobTracker.UpdateProgressAsync(jobId, 90, "Finalizing...");
             // Here you would save the extracted text to a DB or search index
-            
+
             await jobTracker.CompleteJobAsync(jobId);
         }, ct);
 

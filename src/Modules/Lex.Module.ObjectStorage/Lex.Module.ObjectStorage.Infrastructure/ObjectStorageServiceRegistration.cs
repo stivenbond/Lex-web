@@ -13,20 +13,20 @@ public static class ObjectStorageServiceRegistration
     {
         var cs = configuration.GetConnectionString("Default")
             ?? throw new InvalidOperationException("Connection string 'Default' not configured.");
-        
+
         services.AddDbContext<Lex.Module.ObjectStorage.Persistence.ObjectStorageDbContext>(o =>
             o.UseNpgsql(cs, b => b.MigrationsAssembly(typeof(ObjectStorageServiceRegistration).Assembly.FullName)));
 
         services.AddScoped<Infrastructure.Providers.IStorageProvider, Infrastructure.Providers.PostgresStorageProvider>();
         services.AddScoped<Infrastructure.Providers.IStorageProvider, Infrastructure.Providers.GarageStorageProvider>();
-        
+
         services.AddScoped<SharedKernel.Abstractions.IObjectStorageService, Infrastructure.ObjectStorageService>();
 
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(ObjectStoragePermissions).Assembly));
-        
+
         services.AddValidatorsFromAssembly(typeof(ObjectStoragePermissions).Assembly);
-        
+
         return services;
     }
 }

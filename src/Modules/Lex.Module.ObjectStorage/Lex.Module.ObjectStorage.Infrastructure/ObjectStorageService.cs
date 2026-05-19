@@ -18,7 +18,7 @@ internal sealed class ObjectStorageService(
     public async Task<Result<Guid>> UploadAsync(Stream data, string fileName, string contentType, CancellationToken ct)
     {
         var providerType = GetConfiguredProvider();
-        
+
         if (providerType == StorageProvider.PostgreSQL && data.Length > PostgresLimit)
         {
             return Error.Validation("FileTooLarge", "Files larger than 10MB cannot be stored in PostgreSQL. Please switch to Garage storage.");
@@ -32,9 +32,9 @@ internal sealed class ObjectStorageService(
 
         var record = FileRecord.Create(fileName, contentType, data.Length, providerType, saveResult.Value!);
         dbContext.FileRecords.Add(record);
-        
+
         await dbContext.SaveChangesAsync(ct);
-        
+
         return record.Id;
     }
 
@@ -58,7 +58,7 @@ internal sealed class ObjectStorageService(
 
         dbContext.FileRecords.Remove(record);
         await dbContext.SaveChangesAsync(ct);
-        
+
         return Result.Success();
     }
 

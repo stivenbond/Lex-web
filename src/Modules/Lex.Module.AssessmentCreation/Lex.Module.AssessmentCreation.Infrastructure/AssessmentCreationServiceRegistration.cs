@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.AssessmentCreation;
+
 public static class AssessmentCreationServiceRegistration
 {
     public static IServiceCollection AddAssessmentCreationModule(
@@ -16,7 +17,7 @@ public static class AssessmentCreationServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(AssessmentCreationPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(AssessmentCreationPermissions).Assembly);
-        services.AddScoped<Lex.Module.AssessmentCreation.Core.Domain.IAssessmentRepository>(sp => 
+        services.AddScoped<Lex.Module.AssessmentCreation.Core.Domain.IAssessmentRepository>(sp =>
             sp.GetRequiredService<Lex.Module.AssessmentCreation.Persistence.AssessmentCreationDbContext>());
 
         return services;

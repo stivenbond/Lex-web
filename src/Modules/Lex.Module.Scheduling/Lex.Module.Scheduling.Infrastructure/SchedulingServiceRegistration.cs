@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.Scheduling;
+
 public static class SchedulingServiceRegistration
 {
     public static IServiceCollection AddSchedulingModule(

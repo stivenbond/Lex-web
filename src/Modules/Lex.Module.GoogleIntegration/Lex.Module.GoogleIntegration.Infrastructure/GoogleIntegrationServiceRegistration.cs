@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lex.Module.GoogleIntegration;
+
 public static class GoogleIntegrationServiceRegistration
 {
     public static IServiceCollection AddGoogleIntegrationModule(
@@ -16,7 +17,7 @@ public static class GoogleIntegrationServiceRegistration
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(GoogleIntegrationPermissions).Assembly));
         services.AddValidatorsFromAssembly(typeof(GoogleIntegrationPermissions).Assembly);
-        
+
         services.AddScoped<Lex.Module.GoogleIntegration.Core.Abstractions.IGoogleDriveService, Lex.Module.GoogleIntegration.Infrastructure.Services.GoogleDriveService>();
         services.AddScoped<Lex.Module.GoogleIntegration.Core.Domain.IGoogleRepository>(
             sp => sp.GetRequiredService<Lex.Module.GoogleIntegration.Persistence.GoogleIntegrationDbContext>());

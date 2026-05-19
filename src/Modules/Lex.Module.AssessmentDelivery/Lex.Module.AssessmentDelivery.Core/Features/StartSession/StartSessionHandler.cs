@@ -6,7 +6,7 @@ namespace Lex.Module.AssessmentDelivery.Core.Features.StartSession;
 
 public record StartSessionCommand(Guid SnapshotId, string StudentId) : IRequest<Result<Guid>>;
 
-internal sealed class StartSessionHandler(IDeliveryRepository repository) 
+internal sealed class StartSessionHandler(IDeliveryRepository repository)
     : IRequestHandler<StartSessionCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(StartSessionCommand request, CancellationToken ct)
