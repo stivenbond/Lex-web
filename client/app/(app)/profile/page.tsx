@@ -8,7 +8,7 @@ import { apiFetch } from "@/lib/api/client";
 import { useState } from "react";
 
 export default function ProfilePage() {
-  const { user } = useAuthStore();
+  const { userId, email, roles } = useAuthStore();
   const { logout } = useAuth();
   const [loading, setLoading] = useState(false);
 
@@ -37,16 +37,16 @@ export default function ProfilePage() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4 border-b pb-4">
             <div className="font-medium text-muted-foreground">User ID</div>
-            <div>{user?.userId}</div>
+            <div>{userId}</div>
           </div>
           <div className="grid grid-cols-2 gap-4 border-b pb-4">
             <div className="font-medium text-muted-foreground">Email Address</div>
-            <div>{user?.email}</div>
+            <div>{email}</div>
           </div>
           <div className="grid grid-cols-2 gap-4 border-b pb-4">
             <div className="font-medium text-muted-foreground">Roles</div>
             <div className="flex flex-wrap gap-2">
-              {user?.roles.map((role) => (
+              {roles.map((role: string) => (
                 <span key={role} className="bg-primary/10 text-primary px-2 py-1 rounded text-xs">
                   {role}
                 </span>
