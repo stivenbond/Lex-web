@@ -23,9 +23,13 @@ public sealed class SchedulingRepositoryIntegrationTests : IClassFixture<AppCont
             return;
         }
 
-        await using var db = _fixture.CreateSchedulingDbContext();
-        await db.Database.EnsureDeletedAsync();
-        await db.Database.EnsureCreatedAsync();
+        await using (var db = _fixture.CreateSchedulingDbContext())
+        {
+            await db.Database.CloseConnectionAsync();
+            Npgsql.NpgsqlConnection.ClearAllPools();
+            await db.Database.EnsureDeletedAsync();
+            await db.Database.EnsureCreatedAsync();
+        }
     }
 
     public Task DisposeAsync() => Task.CompletedTask;
