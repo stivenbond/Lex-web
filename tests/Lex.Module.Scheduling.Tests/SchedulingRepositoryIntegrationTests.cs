@@ -24,6 +24,7 @@ public sealed class SchedulingRepositoryIntegrationTests : IClassFixture<AppCont
         }
 
         await using var db = _fixture.CreateSchedulingDbContext();
+        await db.Database.EnsureDeletedAsync();
         await db.Database.EnsureCreatedAsync();
     }
 
@@ -53,7 +54,15 @@ public sealed class SchedulingRepositoryIntegrationTests : IClassFixture<AppCont
         repository.AddSlot(slot);
         await repository.SaveChangesAsync();
 
-        var period = Period.Create(slot.Id, sectionId: 30, classroomId: 12, subject: "Physics", teacherId: "teacher-42", teacherName: "Dr. Green");
+        var classroom = Classroom.Create("Lab 101");
+        arrangeDb.Classrooms.Add(classroom);
+        await arrangeDb.SaveChangesAsync();
+
+        var section = Section.Create("9A");
+        arrangeDb.Sections.Add(section);
+        await arrangeDb.SaveChangesAsync();
+
+        var period = Period.Create(slot.Id, sectionId: section.Id, classroomId: classroom.Id, subject: "Physics", teacherId: "teacher-42", teacherName: "Dr. Green");
         repository.AddPeriod(period);
         await repository.SaveChangesAsync();
 
@@ -69,7 +78,7 @@ public sealed class SchedulingRepositoryIntegrationTests : IClassFixture<AppCont
         var item = items.Single();
         item.TeacherId.Should().Be("teacher-42");
         item.Subject.Should().Be("Physics");
-        item.ClassId.Should().Be(30);
-        item.ClassroomId.Should().Be(12);
+        item.ClassId.Should().Be(section.Id);
+        item.ClassroomId.Should().Be(classroom.Id);
     }
 }
