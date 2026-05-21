@@ -35,7 +35,7 @@ done
 
 docker compose pull postgres rabbitmq redis minio seq
 docker compose build api web
-docker compose up -d postgres rabbitmq redis minio seq
+docker compose up postgres rabbitmq redis minio seq
 
 echo "Waiting for infrastructure..."
 for s in postgres rabbitmq redis; do
@@ -47,21 +47,21 @@ for s in postgres rabbitmq redis; do
 done
 
 echo "Starting Keycloak (may take 90s)..."
-docker compose up -d keycloak
+docker compose up keycloak
 for i in $(seq 1 60); do
   docker compose ps keycloak | grep -q "healthy" && break
   sleep 3; [[ $i -eq 60 ]] && { echo "ERROR: Keycloak not healthy"; exit 1; }
 done
 echo "  ✓ keycloak"
 
-docker compose up -d api
+docker compose up api
 for i in $(seq 1 30); do
   curl -sf http://localhost:80/readyz &>/dev/null && break
   sleep 3; [[ $i -eq 30 ]] && { echo "ERROR: API /readyz failed"; exit 1; }
 done
 echo "  ✓ api"
 
-docker compose up -d web
+docker compose up web
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo " Lex Platform installed successfully!"
