@@ -2,7 +2,9 @@ name: lex
 
 services:
   api:
-    image: ghcr.io/your-org/lex-api:${LEX_VERSION:-latest}
+    build: 
+      context: .., 
+      dockerfile: src/Host/Lex.API/Dockerfile
     restart: unless-stopped
     env_file: .env
     depends_on:
@@ -34,7 +36,9 @@ services:
       start_period: 90s
 
   web:
-    image: ghcr.io/your-org/lex-web:${LEX_VERSION:-latest}
+    build: 
+      context: ../client
+      dockerfile: Dockerfile
     restart: unless-stopped
     env_file: .env
     environment:
