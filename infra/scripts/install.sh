@@ -33,7 +33,8 @@ for v in DB_PASSWORD RABBITMQ_PASSWORD KEYCLOAK_ADMIN_PASSWORD MINIO_ACCESS_KEY 
   fi
 done
 
-docker compose pull
+docker compose pull postgres rabbitmq redis minio seq
+docker compose build api web
 docker compose up -d postgres rabbitmq redis minio seq
 
 echo "Waiting for infrastructure..."
